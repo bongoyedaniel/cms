@@ -13,6 +13,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { count, eq, ilike } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
+import { encode } from 'punycode';
 
 export const db = drizzle(neon(process.env.POSTGRES_URL!));
 
@@ -28,8 +29,20 @@ export const products = pgTable('products', {
   availableAt: timestamp('available_at').notNull()
 });
 
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+});
+
 export type SelectProduct = typeof products.$inferSelect;
 export const insertProductSchema = createInsertSchema(products);
+
+export async function getUsers() {
+  return {
+    allUsers: await db.select().from(users)
+  }
+}
 
 export async function getProducts(
   search: string,

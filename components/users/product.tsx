@@ -11,7 +11,7 @@ import {
 import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { SelectProduct } from '@/lib/db';
-import { deleteProduct } from './actions';
+import { deleteProduct } from '../../app/(dashboard)/users/actions';
 
 export function Product({ product }: { product: SelectProduct }) {
   return (

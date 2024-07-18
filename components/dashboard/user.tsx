@@ -46,7 +46,7 @@ export async function User() {
                 await signOut();
               }}
             >
-              <button type="submit">Sign Out</button>
+              <button type="submit">Sign Out {user.name} </button>
             </form>
           </DropdownMenuItem>
         ) : (
